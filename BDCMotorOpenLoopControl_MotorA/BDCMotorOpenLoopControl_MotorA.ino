@@ -1,11 +1,10 @@
 /*
 Name:    BDCMotorOpenLoopControl_MotorA.ino 有刷直流电机开环电机A测速显示
-原理：
+原理：使用编码器测速
 Created:  09/04/2019 8:39:28 PM
 Author: igcxl
 */
 
-//#include <SSD1306.h>                 //OLED显示器库文件
 #include <FlexiTimer2.h>        //定时中断
 
 
@@ -187,28 +186,10 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-//Set_PWM(155,0,0,0 );
-//delay(5000);
-//Set_PWM(0,0,0,0 );
-//delay(5000);
-//Set_PWM(200,0,0,0 );
-//delay(5000);
-//Set_PWM(50,0,0,0 );
-//delay(25000);
-//Set_PWM(-50,-50,-50,-50 );
-//delay(5000);
-//Set_PWM(125,125); //Move Forward at full speed
-//delay(5000);
-//Set_PWM(-10,-20); //Set_PWM(int motorLeft, int motorRight)
-//delay(5000);
+
 //电机死区测试
 for(int i = 0; i< 256; i++){
-//iConstrain = constrain(i, 0, 255-motorDeadZone); //将i限制在0-（255-motorDeadZone）区间，大于返回（255-motorDeadZone） ，小于返回0
-//Set_PWM(iConstrain,0,0,0);
 Set_PWM(i,0,0,0);
-
-//Serial.println(iConstrain);
 delay(5000);
 Serial.print(millis());
 Serial.print(",");

@@ -58,7 +58,7 @@ void loop() {
 Set_PWM(0,155,0,155 );
 delay(5000);
 //电机死区测试
-for(int i = 0; i< 255; i++){
+for(int i = 0; i< 256; i++){
 int iConstrain = constrain(i, 0, 255-motorDeadZone); //将i限制在0-（255-motorDeadZone）区间，大于返回（255-motorDeadZone） ，小于返回0
 Set_PWM(iConstrain,iConstrain,iConstrain,iConstrain);
 Serial.println(i);

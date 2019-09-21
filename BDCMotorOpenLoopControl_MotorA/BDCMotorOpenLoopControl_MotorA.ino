@@ -63,9 +63,7 @@ void Set_PWM(int motora, int motorb, int motorc,int motord) {
 void Set_PWM(int motorLeft, int motorRight){
   //motorLeft -->  motorb 和 motora
   //motorRight -->  motorc 和 motord
-  
-//  Serial.println(motorLeft);
-//  Serial.println(motorRight);
+
   if (motorLeft > 0)        analogWrite(AIN2, motorLeft+motorDeadZone), analogWrite(AIN1, 0); //赋值给PWM寄存器根据电机响应速度与机械误差微调,
   else if(motorLeft == 0)   analogWrite(AIN2, 0), analogWrite(AIN1, 0);   
   else if (motorLeft < 0)   analogWrite(AIN1, -motorLeft+motorDeadZone), analogWrite(AIN2, 0);//高频时电机启动初始值高约为130，低频时电机启动初始值低约为30
@@ -130,26 +128,16 @@ void READ_ENCODER_D() {
     else     Velocity_4++;
   }
 }
-/*********函数功能：10ms控制函数 核心代码 作者：igcxl*******/
+/*********函数功能：10ms控制函数*******/
 void control() {
 
-  static int print_Count;
+  //static int print_Count;
   sei();//全局中断开启
   Velocity_A = -Velocity_1;    Velocity_1 = 0; //读取编码器数据并根据实际接线做调整、然后清零，这就是通过M法测速（单位时间内的脉冲数）得到速度。
   Velocity_B =  Velocity_2;    Velocity_2 = 0; //读取编码器数据并根据实际接线做调整、然后清零，这就是通过M法测速（单位时间内的脉冲数）得到速度。
   Velocity_C = -Velocity_3;    Velocity_3 = 0; //读取编码器数据并根据实际接线做调整、然后清零，这就是通过M法测速（单位时间内的脉冲数）得到速度。
   Velocity_D = -Velocity_4;    Velocity_4 = 0; //读取编码器数据并根据实际接线做调整、然后清零，这就是通过M法测速（单位时间内的脉冲数）得到速度。
-//  if (++print_Count >= 10) //打印控制，控制周期100ms
-//  {
-// // Serial.println(millis());//显示 
-////  Serial.print(Velocity_A);//显示 
-////  Serial.print(",");
-// // Serial.println(Velocity_B);//显示
-//  //Serial.println(Velocity_C);//显示
-//  //Serial.println(Velocity_D);//显示
-//  //Serial.println(iConstrain);
-//    print_Count = 0;
-//  }
+
 
 }
 void setup() {
@@ -187,7 +175,7 @@ void setup() {
 
 void loop() {
 
-//电机死区测试
+//电机测速
 for(int i = 0; i< 256; i++){
 Set_PWM(i,0,0,0);
 delay(5000);

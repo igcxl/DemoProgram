@@ -1,58 +1,58 @@
-/*
-  Software serial multple serial test
-
- Receives from the hardware serial, sends to software serial.
- Receives from software serial, sends to hardware serial.
-
- The circuit:
- * RX is digital pin 10 (connect to TX of other device)
- * TX is digital pin 11 (connect to RX of other device)
-
- Note:
- Not all pins on the Mega and Mega 2560 support change interrupts,
- so only the following can be used for RX:
- 10, 11, 12, 13, 50, 51, 52, 53, 62, 63, 64, 65, 66, 67, 68, 69
-
- Not all pins on the Leonardo and Micro support change interrupts,
- so only the following can be used for RX:
- 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI).
-
- created back in the mists of time
- modified 25 May 2012
- by Tom Igoe
- based on Mikal Hart's example
-
- This example code is in the public domain.
-
+/**
+ * @file SoftwareSerial_TTS.ino 软串口和TTS通讯测试程序SG
+ * @author igcxl (igcxl@qq.com)
+ * @brief  软串口和TTS通讯测试程序
+ * @note 硬串口接收到数据时软串口发送GBK编码“你好”，软串口接收到数据时发送到硬串口
+ * Not all pins on the Mega and Mega 2560 support change interrupts,
+ *so only the following can be used for RX:
+ *10, 11, 12, 13, 50, 51, 52, 53, 62, 63, 64, 65, 66, 67, 68, 69
+ * @version 0.5
+ * @date 2019-09-24
+ * @copyright Copyright © igcxl.com 2019
+ * 
  */
+
 #include <SoftwareSerial.h>
+SoftwareSerial mySerial(A14, A15); // (RX, TX)(A8, A9)
 
-SoftwareSerial mySerial(A8, A9); // RX, TX
-
-void setup() {
+void setup()
+{
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
-
-
+//  while (!Serial)
+//  {
+//    ; // wait for serial port to connect. Needed for native USB port only
+//  }
   Serial.println("Goodnight moon!");
+  delay(100);
 
   // set the data rate for the SoftwareSerial port
   mySerial.begin(9600);
-  mySerial.println("H");
+     mySerial.write(0xB3); //初
+    mySerial.write(0xF5);
+    mySerial.write(0xCA); //始
+    mySerial.write(0xBC);
+    mySerial.write(0xBB); //化
+    mySerial.write(0xAF);
+ mySerial.println("OK");
 }
 
-void loop() { // run over and over
-  if (mySerial.available()) {
+void loop()
+{
+  if (mySerial.available())
+  {
     Serial.write(mySerial.read());
   }
-  if (Serial.available()>0) {
-      Serial.println(Serial.available());
-    mySerial.write(0xBD);
-    mySerial.write(0xE1);
+  if (Serial.available() > 0)
+  {
+    Serial.println(Serial.available());
+    mySerial.write(0xC4); //你
+    mySerial.write(0xE3);
+    mySerial.write(0xBA); //好
+    mySerial.write(0xC3);
     delay(30);
-    while(Serial.read()>=0){}//清空串口缓存
+    while (Serial.read() >= 0)
+    {
+    } //清空串口缓存
   }
 }

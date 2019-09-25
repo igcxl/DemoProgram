@@ -14,7 +14,7 @@ const int ECHO_PIN = 13;
 float distance;
 void setup()
 {
-    Serial.begin(9600);           // 初始化串口通信
+    Serial.begin(115200);           // 初始化串口通信
     pinMode(TRIGGER_PIN, OUTPUT); // 初始化SR04的引脚
     pinMode(ECHO_PIN, INPUT);     // 要检测引脚上输入的脉冲宽度，需要先设置为输入状态
     Serial.println("Ultrasonic sensor:");
@@ -32,5 +32,5 @@ void loop()
     Serial.print(distance);
     Serial.print("cm");
     Serial.println();
-    delay(1000);
+    delay(500);
 }

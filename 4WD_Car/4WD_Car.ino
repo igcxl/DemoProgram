@@ -2,7 +2,7 @@
  * @file 4WD_Car.ino 小车PS2遥控测试程序SG
  * @author igcxl (igcxl@qq.com)
  * @brief 小车PS2遥控测试
- * @note 手柄三角键执行机械臂动作组0,左遥控控制小车方向
+ * @note 手柄三角键执行机械臂动作组0,左遥杆控制小车方向
  * @version 0.5
  * @date 2019-09-15
  * @copyright Copyright © igcxl.com 2019

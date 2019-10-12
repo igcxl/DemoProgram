@@ -19,7 +19,7 @@ const int DIN1 = 44;//D电机控制PWM波
 const int DIN2 = 46;//D电机控制PWM波
 
 //******************电机启动初始值  作者：igcxl**********************//
-int motorDeadZone = 0;//高频时电机启动初始值高约为130，低频时电机启动初始值低约为30,和电池电压、电机特性、PWM频率等有关，需要自己测试
+int motorDeadZone = 130;//高频时电机启动初始值高约为130，低频时电机启动初始值低约为30,和电池电压、电机特性、PWM频率等有关，需要自己测试
 
 //******************编码器引脚***************************//
 #define ENCODER_A 2//A路电机编码器引脚AA，外部中断，中断号0
@@ -176,9 +176,9 @@ void setup() {
 void loop() {
 
 //电机测速
-for(int i = 0; i< 256; i++){
+for(int i = 0; i< 126; i++){
 Set_PWM(i,0,0,0);
-delay(5000);
+delay(1000);
 Serial.print(millis());
 Serial.print(",");
 Serial.print(Velocity_A);//显示 

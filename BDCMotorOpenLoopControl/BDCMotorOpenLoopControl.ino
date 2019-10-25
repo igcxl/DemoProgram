@@ -55,7 +55,7 @@ void setup() {
 }
 
 void loop() {
-Set_PWM(0,155,0,155 );
+Set_PWM(155,0,0,0 );
 delay(5000);
 //电机死区测试
 for(int i = 0; i< 256; i++){
